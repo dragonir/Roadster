@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import * as CANNON from 'cannon'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { JoyStick } from '../lib/joystick';
+import JoyStick from '../lib/joystick';
 
 export default class Car {
     constructor(scene, world) {
@@ -208,6 +208,8 @@ export default class Car {
               this.vehicle.setBrake(0, 2);
               this.vehicle.setBrake(0, 3);
           
+              this.vehicle.applyEngineForce(force, 0);
+              this.vehicle.applyEngineForce(force, 1);
               this.vehicle.applyEngineForce(force, 2);
               this.vehicle.applyEngineForce(force, 3);
             }else{

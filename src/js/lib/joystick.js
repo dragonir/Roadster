@@ -1,4 +1,4 @@
-export class JoyStick{
+export default class JoyStick{
 	constructor(options){
 		const circle = document.createElement("div");
 		circle.style.cssText = "position:absolute; bottom:35px; width:80px; height:80px; background:rgba(126, 126, 126, 0.5); border:#444 solid medium; border-radius:50%; right:0%; transform:translateX(-50%);";

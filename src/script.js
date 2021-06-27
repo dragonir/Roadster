@@ -4,8 +4,9 @@ import * as CANNON from 'cannon'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 import Car from './js/world/car';
-import Buildings from './js/world/buildings';
 import Camera from './js/world/camera';
+import Buildings from './js/world/buildings';
+import Bricks from './js/world/bricks';
 import CannonHelper from './js/lib/cannonhelper';
 import gsap from 'gsap';
 
@@ -61,13 +62,13 @@ function initPhysics(){
     
     world.broadphase = new CANNON.SAPBroadphase(world);
     world.gravity.set(0, -10, 0);
-    world.defaultContactMaterial.friction = 0;
+    // world.defaultContactMaterial.friction = 0;
     
     const groundMaterial = new CANNON.Material("groundMaterial");
     const wheelMaterial = new CANNON.Material("wheelMaterial");
     const wheelGroundContactMaterial = new CANNON.ContactMaterial(wheelMaterial, groundMaterial, {
-        friction: 4,
-        restitution: 1,
+        friction: 0.1,
+        restitution: 0.7,
         contactEquationStiffness: 1000
     });
     
@@ -76,6 +77,7 @@ function initPhysics(){
     car = new Car(scene, world);
     new Buildings(scene, world);
     new Camera(scene, world, car, camera);
+    new Bricks(scene, world);
     
     const hfShape = new CANNON.Plane();
     const hfBody = new CANNON.Body({ mass: 0 });

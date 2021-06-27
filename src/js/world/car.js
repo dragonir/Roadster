@@ -23,14 +23,14 @@ export default class Car {
         const chassisShape = new CANNON.Box(chassisDimensions);
         const groundMaterial = new CANNON.Material("groundMaterial");
         const wheelMaterial = new CANNON.Material("wheelMaterial");
-        const chassisBody = new CANNON.Body({ mass: 100, material: groundMaterial });
+        const chassisBody = new CANNON.Body({ mass: 180, material: groundMaterial });
         
         const helpChassisGeo = new THREE.BoxBufferGeometry(chassisDimensions.x * 2, chassisDimensions.y * 2, chassisDimensions.z * 2);
         const helpChassisMat = new THREE.MeshStandardMaterial({color: 0xff0000, wireframe: true});
         const helpChassis = new THREE.Mesh(helpChassisGeo, helpChassisMat);
         // this.scene.add(helpChassis);
 
-        chassisBody.position.set(-0, 4, 0);
+        chassisBody.position.set(0, 4, 0);
         chassisBody.angularVelocity.set(0, 0, 0);
         chassisBody.addShape(chassisShape);
 
@@ -51,9 +51,9 @@ export default class Car {
         const options = {
             radius: 0.5,
             directionLocal: new CANNON.Vec3(0, -1, 0),
-            suspensionStiffness: 75,
+            suspensionStiffness: 55,
             suspensionRestLength: 0.5,
-            frictionSlip: 50,
+            frictionSlip: 30,
             dampingRelaxation: 2.3,
             dampingCompression: 4.3,
             maxSuspensionForce: 500000,
@@ -136,11 +136,15 @@ export default class Car {
          */
 
         const maxSteerVal = 0.5;
-        const maxForce = 500;
+        const maxForce = 750;
         const brakeForce = 15;
         const keysPressed = [];
 
-        window.addEventListener('keydown', (e) => {if(!keysPressed.includes(e.keyCode)) keysPressed.push(e.keyCode); hindMovement();});
+        window.addEventListener('keydown', (e) => {
+            if(e.key === 'r') resetCar();
+            if(!keysPressed.includes(e.keyCode)) keysPressed.push(e.keyCode); 
+            hindMovement();
+        });
         window.addEventListener('keyup', (e) => {keysPressed.splice(keysPressed.indexOf(e.keyCode), 1); hindMovement();});
 
         const hindMovement = () => {
@@ -178,18 +182,25 @@ export default class Car {
                 brake();
         }
 
+        const resetCar = () => {
+            this.vehicle.chassisBody.position.y = 4;
+            this.vehicle.chassisBody.quaternion.copy(this.vehicle.chassisBody.initQuaternion);
+            this.vehicle.chassisBody.velocity.copy(this.vehicle.chassisBody.initVelocity);
+            this.vehicle.chassisBody.angularVelocity.copy(this.vehicle.chassisBody.initAngularVelocity);
+        }
+
         const brake = () => {    
-            this.vehicle.setBrake(brakeForce * 2, 0);
-            this.vehicle.setBrake(brakeForce * 2, 1);
-            this.vehicle.setBrake(brakeForce * 2, 2);
-            this.vehicle.setBrake(brakeForce * 2, 3);
+            this.vehicle.setBrake(brakeForce * 2.4, 0);
+            this.vehicle.setBrake(brakeForce * 2.4, 1);
+            this.vehicle.setBrake(brakeForce * 2.4, 2);
+            this.vehicle.setBrake(brakeForce * 2.4, 3);
         }
 
         const stopCar = () => {
-            this.vehicle.setBrake(brakeForce * 0.8, 0);
-            this.vehicle.setBrake(brakeForce * 0.8, 1);
-            this.vehicle.setBrake(brakeForce * 0.8, 2);
-            this.vehicle.setBrake(brakeForce * 0.8, 3);
+            this.vehicle.setBrake(brakeForce * 1.4, 0);
+            this.vehicle.setBrake(brakeForce * 1.4, 1);
+            this.vehicle.setBrake(brakeForce * 1.4, 2);
+            this.vehicle.setBrake(brakeForce * 1.4, 3);
         }
 
         const stopSteer = () => {
@@ -229,5 +240,18 @@ export default class Car {
         });
 
         // JoyStick move ^^^
+    }
+
+    colorChanger() {
+        document.querySelectorAll(".color").forEach((elem, index) => {
+            elem.addEventListener("click", (e) => {
+                const attr = e.target.getAttribute("data-color");
+                console.log(attr);
+                document.querySelectorAll(".color").forEach(elem => {
+                    elem.classList.remove("selected");
+                });
+                e.target.classList.add("selected");
+            })
+        })
     }
 }

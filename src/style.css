@@ -22,3 +22,45 @@ body
 body:active {
     cursor: grabbing;
 }
+
+.colors {
+    position: absolute;
+    height: 50px;
+    width: 250px;
+    margin: auto;
+    top: 15px;
+    right: 0;left: 0;
+    backdrop-filter: blur(5px);
+    background: rgba(98, 98, 98, 0.2);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-radius: 9999px;
+}
+
+.color {
+    margin: auto;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.color.selected {
+    border: 2px solid rgb(0, 136, 255);
+}
+
+.white {
+    background: linear-gradient(135deg, #fff, rgb(150, 150, 150));
+}
+.red {
+    background: linear-gradient(135deg, #f00, rgb(150, 0, 0));
+}
+.blue {
+    background: linear-gradient(135deg, #00f, rgb(0, 0, 150));
+}
+.grey {
+    background: linear-gradient(135deg, #777, #666);
+}
+.black {
+    background: linear-gradient(135deg, #555, #000);
+}

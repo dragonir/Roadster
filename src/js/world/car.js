@@ -15,6 +15,7 @@ export default class Car {
     init() {
         this.setup();
         this.controls();
+        this.colorChanger();
     }
 
     setup() {   
@@ -242,15 +243,50 @@ export default class Car {
         // JoyStick move ^^^
     }
 
-    colorChanger() {
+    colorChanger() {        
         document.querySelectorAll(".color").forEach((elem, index) => {
             elem.addEventListener("click", (e) => {
+                const car_paint = this.chassis.children[0].children[0].children[0].children[2].children[0];
+                const tesla_logo = this.chassis.children[0].children[0].children[0].children[27].children[0];
+                const tesla_logo_2 = this.chassis.children[0].children[0].children[0].children[31].children[0];
+                
+                tesla_logo.material = new THREE.MeshBasicMaterial({color: 0x000000})
+                tesla_logo_2.material = new THREE.MeshBasicMaterial({color: 0x000000})
+                
                 const attr = e.target.getAttribute("data-color");
-                console.log(attr);
                 document.querySelectorAll(".color").forEach(elem => {
                     elem.classList.remove("selected");
                 });
                 e.target.classList.add("selected");
+
+
+                switch(attr) {
+                    case "white":
+                        car_paint.material.color.setHex(0xffffff);
+                        tesla_logo.material.color.setHex(0x000000);
+                        tesla_logo_2.material.color.setHex(0x000000);
+                        break;
+                    case "red":
+                        car_paint.material.color.setHex(0xb4030a);
+                        tesla_logo.material.color.setHex(0xffffff);
+                        tesla_logo_2.material.color.setHex(0xffffff);
+                        break;
+                    case "blue":
+                        car_paint.material.color.setHex(0x1a009a);
+                        tesla_logo.material.color.setHex(0xffffff);
+                        tesla_logo_2.material.color.setHex(0xffffff);
+                        break;
+                    case "grey":
+                        car_paint.material.color.setHex(0x666666);
+                        tesla_logo.material.color.setHex(0xffffff);
+                        tesla_logo_2.material.color.setHex(0xffffff);
+                        break;
+                    case "black":
+                        car_paint.material.color.setHex(0x222222);
+                        tesla_logo.material.color.setHex(0xffffff);
+                        tesla_logo_2.material.color.setHex(0xffffff);
+                        break;
+                }
             })
         })
     }

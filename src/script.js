@@ -10,7 +10,7 @@ import Bricks from './js/world/bricks';
 import CannonHelper from './js/lib/cannonhelper';
 import gsap from 'gsap';
 
-var scene, camera, renderer, world, helper, car, light;
+var scene, camera, renderer, world, helper, car, light, light2;
 
 init();
 
@@ -25,17 +25,13 @@ function init(){
   scene.add(ambient);
 
 
-  light = new THREE.DirectionalLight(0xffffff, 0.8);
-  light.position.set(1,2,1);
-  light.castShadow = true;
+  light = new THREE.DirectionalLight(0xffffff, 0.6);
+  light.position.set(1,2,-2);
   
-  light.shadow.mapSize.width = 1000;
-  light.shadow.mapSize.height = 1000;
-  light.shadow.camera.near = 0.5;
-  light.shadow.camera.far = 1000;
-  light.shadow.camera = new THREE.OrthographicCamera( -100, 100, 100, -100, 0.5, 5000 );
-  light.shadow.radius = 5;
-  scene.add(light);
+  light2 = new THREE.DirectionalLight(0xffffff, 0.4);
+  light2.position.set(-1,2,2);
+
+  scene.add(light, light2);
 
   renderer = new THREE.WebGLRenderer({antialias: true});
   renderer.setSize( window.innerWidth, window.innerHeight );

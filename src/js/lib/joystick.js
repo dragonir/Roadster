@@ -36,11 +36,11 @@ export default class JoyStick{
 		this.offset = this.getMousePosition(evt);
 		const joystick = this;
 		if ('ontouchstart' in window){
-			document.ontouchmove = function(evt){ evt.preventDefault(); joystick.move(evt); };
-			document.ontouchend =  function(evt){ evt.preventDefault(); joystick.up(evt); };
+			this.domElement.addEventListener("touchmove", function(evt){ evt.preventDefault(); joystick.move(evt); },  { passive: false, })
+			this.domElement.addEventListener("touchend", function(evt){ evt.preventDefault(); joystick.up(evt); },  { passive: false, })
 		}else{
-			document.onmousemove = function(evt){ evt.preventDefault(); joystick.move(evt); };
-			document.onmouseup = function(evt){ evt.preventDefault(); joystick.up(evt); };
+			this.domElement.addEventListener("mousemove", function(evt){ evt.preventDefault(); joystick.move(evt); },  { passive: false, })
+			this.domElement.addEventListener("mouseup", function(evt){ evt.preventDefault(); joystick.up(evt); },  { passive: false, })
 		}
 	}
 	

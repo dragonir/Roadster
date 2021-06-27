@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap');
 *
 {
     margin: 0;
     padding: 0;
+    font-family: "Montserrat", sans-serif;
+    color: #fff;
+    user-select: none;
 }
 
 html,
@@ -59,8 +63,61 @@ body:active {
     background: linear-gradient(135deg, #00f, rgb(0, 0, 150));
 }
 .grey {
-    background: linear-gradient(135deg, #777, #666);
+    background: linear-gradient(135deg, #777, #444);
 }
 .black {
     background: linear-gradient(135deg, #555, #000);
+}
+
+.info-icon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    top: 30px;
+    left: 30px;
+    cursor: pointer;
+}
+
+.info-icon img {
+    height: 100%;
+    width: 100%;
+}
+
+.info {
+    display: none;
+    height: fit-content;
+    width: 30pc;
+    position: absolute;
+    margin: auto;
+    top: 0;bottom: 0;left: 0;right: 0;
+    backdrop-filter: blur(5px);
+    border-radius: 20px;
+    background: rgba(98, 98, 98, 0.7);
+    padding: 20px;
+}
+.info.open {
+    display: block;
+}
+
+.info ul {
+    padding: 20px;
+}
+
+.info ul li {
+    padding: 4px 0;
+}
+
+.info b u {
+    cursor: pointer;
+}
+
+.zoom-slider {
+    writing-mode: bt-lr; /* IE */
+    -webkit-appearance: slider-vertical; 
+    position: absolute;
+    width: 10px;
+    height: 40vh;
+    margin: auto;
+    transform: rotate(-180deg);
+    top: 0;left: 36px;bottom: 0;
 }

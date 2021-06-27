@@ -88,12 +88,17 @@ export default class Camera {
             if(cameraFov > 40) {
                 cameraFov = 40;
             }
-            gsap.to(this.camera, {
-                duration: 0,
-                fov: cameraFov
-            })
+            this.camera.fov = cameraFov;
+            document.querySelector(".zoom-slider").value = cameraFov;
             this.camera.updateProjectionMatrix();
         }) 
+        
+        document.querySelector(".zoom-slider").addEventListener("input", e => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.camera.fov = parseInt(e.target.value);
+            this.camera.updateProjectionMatrix();
+        })
     }
     updateCamera() {
         const update = () => {

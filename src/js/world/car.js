@@ -24,6 +24,7 @@ export default class Car {
         const chassisShape = new CANNON.Box(chassisDimensions);
         const groundMaterial = new CANNON.Material("groundMaterial");
         const wheelMaterial = new CANNON.Material("wheelMaterial");
+        groundMaterial.friction = 0;
         const chassisBody = new CANNON.Body({ mass: 180, material: groundMaterial });
         
         const helpChassisGeo = new THREE.BoxBufferGeometry(chassisDimensions.x * 2, chassisDimensions.y * 2, chassisDimensions.z * 2);
@@ -246,10 +247,13 @@ export default class Car {
     colorChanger() {        
         document.querySelectorAll(".color").forEach((elem, index) => {
             elem.addEventListener("click", (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
                 const car_paint = this.chassis.children[0].children[0].children[0].children[2].children[0];
                 const tesla_logo = this.chassis.children[0].children[0].children[0].children[27].children[0];
                 const tesla_logo_2 = this.chassis.children[0].children[0].children[0].children[31].children[0];
-                
+
                 tesla_logo.material = new THREE.MeshBasicMaterial({color: 0x000000})
                 tesla_logo_2.material = new THREE.MeshBasicMaterial({color: 0x000000})
                 

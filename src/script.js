@@ -105,3 +105,10 @@ function update() {
   helper.update();
   renderer.render( scene, camera );
 }
+
+document.querySelector(".info-icon").addEventListener('click', () => {
+  document.querySelector(".info").classList.add("open");
+})
+document.querySelector(".info b u").addEventListener('click', () => {
+  document.querySelector(".info").classList.remove("open");
+})
